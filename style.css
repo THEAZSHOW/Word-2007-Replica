@@ -1,0 +1,139 @@
+/* --- WORD 2007 REPLICA STYLESHEET --- */
+:root {
+    --font-sans: "Segoe UI", Calibri, "Helvetica Neue", Arial, sans-serif;
+    --word-bg: #E3E9EC;
+    --ribbon-bg: #D2DEEE;
+    --ribbon-border: #97B3D7;
+    --ribbon-active-tab: #F2F6FA;
+    --ribbon-group-text: #375372;
+    --word-blue: #2A579A;
+    --word-orange: #D4692C;
+    --border-radius: 3px;
+    --transition-speed: 0.15s;
+}
+*, *::before, *::after { box-sizing: border-box; }
+body {
+    font-family: var(--font-sans);
+    background-color: var(--word-bg);
+    margin: 0;
+    color: #000;
+    font-size: 12px;
+}
+
+/* --- MAIN APP STRUCTURE --- */
+.app-container { display: flex; flex-direction: column; height: 100vh; }
+.main-header-ribbon { display: flex; background: linear-gradient(to bottom, #E8EEF7, #D2DEEE); border-bottom: 1px solid var(--ribbon-border); }
+.main-content { display: flex; flex: 1; padding: 1rem; gap: 1rem; overflow: hidden; }
+.editor-area {
+    flex: 3;
+    background-color: #fff;
+    padding: 2.5cm 2cm;
+    box-shadow: 0 0 10px rgba(0,0,0,0.15);
+    overflow-y: auto;
+    outline: none;
+    font-family: 'Times New Roman', serif;
+    font-size: 12pt;
+    line-height: 1.5;
+}
+
+/* --- OFFICE BUTTON --- */
+.office-button-container { position: relative; }
+#office-button {
+    width: 48px; height: 48px; border-radius: 50%;
+    background-color: var(--word-orange); color: white;
+    border: 2px solid #F29436; margin: 4px; font-size: 24px;
+    cursor: pointer; transition: all var(--transition-speed);
+}
+#office-button:hover { background-color: #E87A31; }
+.office-menu {
+    display: none; position: absolute; top: 58px; left: 4px;
+    background-color: #fff; border: 1px solid #aaa;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.2); z-index: 100;
+    width: 250px; padding: 5px;
+}
+.office-menu.active { display: block; }
+.office-menu button {
+    display: flex; align-items: center; width: 100%; text-align: left;
+    background: none; border: none; padding: 10px 15px; font-size: 14px;
+    cursor: pointer;
+}
+.office-menu button:hover { background-color: #ffe1c7; }
+.office-menu button i { font-size: 20px; color: var(--word-blue); margin-right: 15px; width: 25px; }
+.office-menu hr { border: none; border-top: 1px solid #ddd; margin: 5px 0; }
+
+/* --- RIBBON --- */
+.ribbon-container { flex: 1; }
+.ribbon-tabs {
+    padding: 5px 5px 0 5px;
+}
+.ribbon-tab {
+    background: transparent; border: 1px solid transparent;
+    padding: 6px 12px; font-size: 13px; cursor: pointer;
+    border-top-left-radius: var(--border-radius);
+    border-top-right-radius: var(--border-radius);
+}
+.ribbon-tab.active {
+    background: var(--ribbon-active-tab);
+    border: 1px solid var(--ribbon-border);
+    border-bottom-color: var(--ribbon-active-tab);
+}
+.ribbon-content {
+    background: var(--ribbon-active-tab);
+    border-top: 1px solid var(--ribbon-border);
+    padding: 5px;
+}
+.ribbon-section { display: none; align-items: flex-start; }
+.ribbon-section.active { display: flex; }
+.ribbon-group {
+    display: flex; flex-direction: column; align-items: center;
+    border-right: 1px solid #c5d3e8; padding: 0 10px;
+    position: relative; height: 85px; justify-content: center;
+}
+.ribbon-group:last-child { border-right: none; }
+.ribbon-group .row { display: flex; }
+.ribbon-btn, .ribbon-select, .ribbon-color-label {
+    margin: 1px;
+    border: 1px solid transparent;
+    transition: background-color var(--transition-speed);
+}
+.ribbon-btn, .ribbon-color-label {
+    background: transparent; cursor: pointer; padding: 4px;
+    border-radius: var(--border-radius); font-size: 16px; color: #333;
+}
+.ribbon-btn:hover, .ribbon-color-label:hover { background-color: #FCEEC9; border-color: #F8C06C; }
+.ribbon-btn.is-active { background-color: #FDE29B; border-color: #F8C06C; }
+.ribbon-select {
+    padding: 3px; border-color: #abc; font-size: 11px;
+}
+.ribbon-btn-lrg {
+    display: flex; flex-direction: column; align-items: center;
+    background: none; border: 1px solid transparent; padding: 5px;
+    cursor: pointer; transition: all var(--transition-speed);
+}
+.ribbon-btn-lrg i { font-size: 24px; color: var(--word-blue); }
+.ribbon-btn-lrg span { font-size: 11px; color: var(--ribbon-group-text); }
+.ribbon-btn-lrg:hover { background-color: #FCEEC9; border-color: #F8C06C; }
+
+/* --- SIDEBAR & STATUS BAR --- */
+.sidebar { flex: 1; max-width: 300px; background: #fff; border: 1px solid #ccc; overflow-y: auto; }
+.sidebar-section summary { font-weight: bold; padding: 8px; cursor: pointer; background: #f0f0f0; }
+.details-grid { display: grid; grid-template-columns: 1fr auto; gap: 8px; padding: 10px; font-size: 13px; }
+.details-grid span:nth-child(even) { font-weight: bold; }
+.status-bar {
+    background: linear-gradient(to bottom, #D2DEEE, #B3C7E1);
+    border-top: 1px solid var(--ribbon-border); padding: 5px 10px;
+    font-size: 12px; color: var(--ribbon-group-text);
+}
+@media print {
+    body * { visibility: hidden; }
+    .editor-area, .editor-area * { visibility: visible; }
+    .editor-area {
+        position: absolute; left: 0; top: 0;
+        width: 100%; height: auto;
+        padding: 1in; margin: 0; box-shadow: none; border: none;
+    }
+}
+.ribbon-color-label { position: relative; }
+.ribbon-color-picker { position: absolute; top:0; left: 0; width: 100%; height: 100%; opacity: 0; cursor: pointer; }
+#font-color-icon { border-bottom: 4px solid black; }
+#highlight-color-icon { border-bottom: 4px solid yellow; }
